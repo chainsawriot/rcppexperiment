@@ -47,3 +47,17 @@ bool allC(LogicalVector x) {
   return true;
 }
 
+// [[Rcpp::export]]
+NumericVector cumprodC(NumericVector x) {
+  int n = x.size();
+  NumericVector out(n);
+  for (int i = 0; i < n; ++i) {
+    if (i == 0) {
+      out[i] = x[i];
+    } else {
+      out[i] = x[i-1] * x[i];
+    }
+  }
+  return out;
+}
+
