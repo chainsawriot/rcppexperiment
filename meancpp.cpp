@@ -1,5 +1,7 @@
 #include <Rcpp.h>
+
 using namespace Rcpp;
+using namespace std;
 
 // [[Rcpp::export]]
 double meanC(NumericVector x) {
@@ -61,3 +63,30 @@ NumericVector cumprodC(NumericVector x) {
   return out;
 }
 
+// [[Rcpp::export]]
+NumericVector cumminC(NumericVector x) {
+  int n = x.size();
+  NumericVector out(n);
+  for (int i = 0; i < n; ++i) {
+    if (i == 0) {
+      out[i] = x[i];
+    } else {
+      out[i] = std::min(out[i-1], x[i]);
+    }
+  }
+  return out;
+}
+
+// [[Rcpp::export]]
+NumericVector cummaxC(NumericVector x) {
+  int n = x.size();
+  NumericVector out(n);
+  for (int i = 0; i < n; ++i) {
+    if (i == 0) {
+      out[i] = x[i];
+    } else {
+      out[i] = std::max(out[i-1], x[i]);
+    }
+  }
+  return out;
+}
